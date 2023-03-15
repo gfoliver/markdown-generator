@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.converted h1 {
+  @apply text-2xl;
+}
+
+.converted h1,
+.converted h2,
+.converted h3,
+.converted h4,
+.converted h5,
+.converted h6 {
+  @apply font-bold;
+}
+
+.converted >* {
+  @apply mb-4;
+}
+
+.converted ul, .converted ol {
+  @apply pl-6;
+}
+
+.converted ul {
+    @apply list-disc;
+}
+
+.converted ol {
+    @apply list-decimal;
+}
