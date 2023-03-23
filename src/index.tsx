@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { DarkContextProvider } from './context/Dark';
+import { TemplatesContextProvider } from './context/Templates';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <DarkContextProvider>
-      <App />
+      <TemplatesContextProvider>
+        <App />
+      </TemplatesContextProvider>
     </DarkContextProvider>
   </React.StrictMode>
 );

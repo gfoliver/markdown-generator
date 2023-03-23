@@ -1,6 +1,6 @@
 import React from 'react';
 import { Moon, Sun } from 'react-feather';
-import { useDarkMode } from './context/Dark';
+import { useDarkMode } from '../context/Dark';
 import { useLocation, Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
@@ -10,13 +10,25 @@ const Header: React.FC = () => {
     const activeClass = 'bg-primary text-text-dark';
     const inactiveClass = 'bg-white dark:bg-dark-lighter';
 
-    const getClass = (desiredPath: string) => {
-        let cl = inactiveClass;
+    const routes = [
+        {path: '/', title: 'Editor'},
+        {path: '/templates', title: 'Templates'},
+    ];
+
+    const getClass = (index: number, desiredPath: string) => {
+        let cl = "px-6 py-2 rounded ";
+
+        if (index === 0)
+            cl += "rounded-tr-none rounded-br-none ";
+        else
+            cl += "rounded-tl-none rounded-bl-none ";
 
         if (location.pathname === desiredPath)
-            cl = activeClass;
+            cl += activeClass;
+        else
+            cl += inactiveClass;
 
-        return "px-6 py-2 rounded " + cl;
+        return cl;
     }
 
     return (
@@ -24,8 +36,11 @@ const Header: React.FC = () => {
             <h1 className='text-3xl font-bold'>Markdown Generator</h1>
             <div className="flex items-center">
               <div className="mr-8 group">
-                <Link to="/" className={getClass('/')}>Editor</Link>
-                <Link to="/templates" className={getClass('/templates')}>Templates</Link>
+                {routes.map((route, index) => (
+                    <Link key={index} to={route.path} className={getClass(index, route.path)}>
+                        {route.title}
+                    </Link>
+                ))}
               </div>
               <button className="p-2 px-3 bg-white rounded dark:bg-primary" onClick={toggleMode}>
                 {isDarkMode ? <Sun width="1rem" /> : <Moon width="1rem" />}
